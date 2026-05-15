@@ -40,3 +40,13 @@ button {
     box-shadow:0 0 15px rgba(255, 77, 166, 0.6);
     transition : 0.3s;
 }
+
+img {
+    max-width: 300px;
+    border-radius: 12px;
+    margin-top: 10px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

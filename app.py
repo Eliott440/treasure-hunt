@@ -4,20 +4,29 @@ app= Flask(__name__)
 
 levels = {
     1 :{
-        "question": "48.71228084157847, 2.170049928081917",
-        "answer": "1001"
+        "comment" : "",
+        "question": "48.71228084157847, 2.170049928081917, , page ",
+        "answer": "9642"
     },
     2 :{
+        "comment" : "",
         "question": "“I am white and watch Paris from above. Artists gather at my feet. My name speaks of love and faith. Looks where the hearts are locked for ever”",
-        "answer": "2002"
+        "answer": "1308"
     },
     3 :{
-        "question": "",
-        "answer": "3003"
+        "comment" : "Congratulation ! The cadenas is yours now, do what you want with it",
+        "question": "48.858278, 2.348444, a tree well explained",
+        "answer": "3894"
     },
     4 :{
-        "question": "48.72544605282604, 2.2625433859515467, 1115",
-        "answer": "3003"
+        "comment" : "",
+        "question": "48.85565848022269, 2.3514410712081717, come on ! Don't miss the bus !",
+        "answer": "5662"
+    },
+    5 :{
+        "comment" : "You are really close !!!",
+        "question": "48.72544605282604, 2.2625433859515467, 1115, 2-6-9",
+        "answer": "195"
     },
 }
 
@@ -28,14 +37,18 @@ hints = {
     },
     2: {
         "text": "Look carefully at this picture.",
-        "image": None
+        "image": "image/hint1.jpg"
     },
     3: {
-        "text": "",
-        "image": None
+        "text": "Look carefully at this picture",
+        "image": "image/hint2.jpg"
     },
     4: {
-        "text": "Lock to travel",
+        "text": "Is the bus on time ?",
+        "image": None
+    },
+    5: {
+        "text": "Lock to travel, pi is a great number",
         "image": None
     }
 }
@@ -74,7 +87,7 @@ def game(level):
             error = "Wrong answer... Try again"
 
 
-    return render_template('game.html', level = level, question=levels[level]["question"], error=error, hint=hints[level])
+    return render_template('game.html', level = level, question=levels[level]["question"], error=error, hint=hints[level], comment=levels[level]["comment"])
 
 if __name__ == "__main__":
     app.run(debug=True)
