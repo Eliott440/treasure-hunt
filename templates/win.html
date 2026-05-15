@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <title>Treasure Hunt Game</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+
+<body>
+    <div class="container">
+
+    <p>Congratulation Selin ! You reach the end of the game and found the tressure !</p> 
+    
+    <canvas id="heart" width="400" height="400"></canvas>
+    <audio id="winMusic" autoplay loop>
+    <source src="{{ url_for('static', filename='Hunt.m4a') }}" type="audio/mp4">
+</audio>
+
+</div>
+<script>
+window.addEventListener("click", () => {
+    document.getElementById("winMusic").play();
+});
+</script>
+
+<script>
+
+// 🎯 Canvas setup
+const canvas = document.getElementById("heart");
+const ctx = canvas.getContext("2d");
+
+// ❤️ progression du dessin
+let t = 0;
+
+
+// ❤️ Fonction de dessin du cœur
+function drawHeart(x, y, scale) {
+
+    ctx.beginPath();
+
+    let started = false;
+
+    for (let i = 0; i < t; i += 0.005) {
+
+        let hx = 16 * Math.pow(Math.sin(i), 3);
+
+        let hy = 13 * Math.cos(i)
+                - 5 * Math.cos(2*i)
+                - 2 * Math.cos(3*i)
+                - Math.cos(4*i);
+
+        let px = x + hx * scale;
+        let py = y - hy * scale;
+
+        if (!started) {
+            ctx.moveTo(px, py);
+            started = true;
+        } else {
+            ctx.lineTo(px, py);
+        }
+    }
+
+    // 💖 style néon rose
+    ctx.strokeStyle = "#ff4da6";
+    ctx.lineWidth = 3;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+
+    ctx.shadowColor = "#ff4da6";
+    ctx.shadowBlur = 15;
+
+    ctx.stroke();
+}
+
+
+// 🔁 animation
+function animate() {
+
+    ctx.clearRect(0, 0, 400, 400);
+
+    // ❤️ dessin du cœur
+    drawHeart(200, 200, 10);
+
+    // ⏫ progression
+    t += 0.015;
+
+    // 🔁 boucle infinie propre
+    if (t > Math.PI * 2 + 1) {
+        t = 0;
+    }
+
+    requestAnimationFrame(animate);
+}
+
+// 🚀 start
+animate();
+
+</script>
+</body>
+
+</html>
